@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.lrmc import utils
+from .. import utils
 
 from ._base import MatrixCompletionBase
 

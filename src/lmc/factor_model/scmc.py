@@ -2,7 +2,7 @@
 
 import numpy as np
 import tensorflow as tf
-from src.lmc import utils
+from .. import utils
 
 from numpy.lib.stride_tricks import as_strided
 

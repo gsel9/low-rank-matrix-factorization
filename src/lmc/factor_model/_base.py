@@ -6,7 +6,7 @@ from abc import ABC
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
-from src.lmc.convergence import FactorConvergence
+from ..convergence import FactorConvergence
 
 
 class MatrixCompletionBase(ABC):

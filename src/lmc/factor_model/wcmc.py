@@ -2,7 +2,7 @@
 import numpy as np
 import tensorflow as tf
 
-from src.lmc import utils
+from .. import utils
 
 # local
 from ._base import MatrixCompletionBase

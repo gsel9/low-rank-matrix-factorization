@@ -2,7 +2,7 @@
 import numpy as np
 
 # local
-from src.lmc import utils
+from .. import utils
 
 from ._base import MatrixCompletionBase
 

@@ -47,7 +47,8 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "-rsx -q --cov=src/lmc --cov-append --tb=short  --ignore=setup.py "
+addopts = "-rsx -q --cov=src/lmc --cov-append --tb=short --ignore=setup.py"
+pythonpath = ["src"]
 norecursedirs = [
     "venv",
 ]
