@@ -47,14 +47,16 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "-rsx -q --cov=lmc --cov-append --cov-config .coveragerc --tb=short  --ignore=setup.py "
+addopts = "-rsx -q --cov=src/lmc --cov-append --tb=short  --ignore=setup.py "
 norecursedirs = [
     "venv",
 ]
 
 [tool.setuptools]
+package-dir = {"" = "src"}
 packages = [
-    "lmc"
+    "lmc",
+    "lmc.factor_model",
 ]
 
 [tool.black]
