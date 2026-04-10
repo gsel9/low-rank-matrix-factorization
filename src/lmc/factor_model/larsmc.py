@@ -54,7 +54,6 @@ class LarsMC(CMC):
         reg = LassoLars(
             alpha=self.alpha,
             fit_path=False,
-            normalize=True,
             fit_intercept=False,
             max_iter=self.n_iter_U,
         ).fit(self.V, self.S.T)
@@ -65,7 +64,8 @@ class LarsMC(CMC):
     def loss(self):
         "Evaluate the optimization objective"
 
-        loss = np.square(np.linalg.norm(self.mask * (self.X - self.U @ self.V.T)))
+        residual = self.mask * (self.X - self.U @ self.V.T)
+        loss = np.square(np.linalg.norm(residual))
         loss += sum(self.alphas * np.linalg.norm(self.U, ord=1, axis=1))
         loss += self.lambda2 * np.square(np.linalg.norm(self.V - self.J))
         loss += self.lambda3 * np.square(np.linalg.norm(self.KD @ self.V))

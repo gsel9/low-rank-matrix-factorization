@@ -4,8 +4,9 @@
 from abc import ABC
 
 import numpy as np
+from sklearn.metrics import mean_squared_error
 
-from lmc.convergence import FactorCovergence
+from src.lmc.convergence import FactorConvergence
 
 
 class MatrixCompletionBase(ABC):
@@ -20,7 +21,7 @@ class MatrixCompletionBase(ABC):
         lambda2=1.0,
         lambda3=1.0,
         random_state=42,
-        missing_value=None,
+        missing_value=0,
         early_stopping=True,
     ):
         self.r = rank
@@ -69,14 +70,21 @@ class MatrixCompletionBase(ABC):
         rnd = np.random.RandomState(self.random_state)
         return rnd.normal(size=(self.N, self.r))
 
-    # Alternatively
     def transform(self, X, y=None):
         # estimate least-squares coefficients from shared basic profiles
-        U_star = (2 * X @ self.V) @ np.linalg.inv(self.V.T @ self.V)
+        U_star = (X @ self.V) @ np.linalg.inv(self.V.T @ self.V)
         return U_star @ self.V.T
 
+    def score(self, X, y=None):
+        """Return negative MSE on observed entries (higher is better)."""
+        mask = (X != self.missing_value).astype(float)
+        X_obs = X * mask
+        M_obs = self.M * mask
+        return -mean_squared_error(X_obs.ravel(), M_obs.ravel())
+
     def fit(self, X, y=None, verbose=1):
-        """Run matrix completion on input matrix X using a factorization model."""
+        """Run matrix completion on input matrix X using a factorization
+        model."""
 
         # re-initialize attributes
         self.n_iter_ = 0
@@ -85,7 +93,7 @@ class MatrixCompletionBase(ABC):
         self._init_matrices(X)
 
         if self.early_stopping:
-            monitor = FactorCovergence(verbose=verbose)
+            monitor = FactorConvergence(verbose=verbose)
 
         for _ in range(self.n_iter):
             self.run_step()

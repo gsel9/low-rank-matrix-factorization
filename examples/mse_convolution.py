@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # local
-from lmc import CMC, LMC
+from src.lrmc import CMC, LMC
 from sklearn.metrics import mean_squared_error
 from synthetic_data import synthetic_data_generator
 from utils import format_axis, set_fig_size

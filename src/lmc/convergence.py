@@ -6,7 +6,9 @@ import numpy as np
 
 
 class ConvergenceMonitor(ABC):
-    def __init__(self, patience: int = 0, tolerance: float = 1e-6, verbose: int = 1):
+    def __init__(
+        self, patience: int = 0, tolerance: float = 1e-6, verbose: int = 1
+    ):
         self.patience = patience
         self.tolerance = tolerance
         self.verbose = verbose
@@ -37,10 +39,16 @@ class ConvergenceMonitor(ABC):
         self.n_iter_ += 1
         self.old_estimate_ = new_estimate
 
+        return False
 
-class FactorCovergence(ConvergenceMonitor):
-    def __init__(self, patience: int = 0, tolerance: float = 1e-6, verbose: int = 1):
-        super().__init__(patience=patience, tolerance=tolerance, verbose=verbose)
+
+class FactorConvergence(ConvergenceMonitor):
+    def __init__(
+        self, patience: int = 0, tolerance: float = 1e-6, verbose: int = 1
+    ):
+        super().__init__(
+            patience=patience, tolerance=tolerance, verbose=verbose
+        )
 
     def estimate_error(self, new_estimate):
         diff = np.linalg.norm(new_estimate - self.old_estimate_)

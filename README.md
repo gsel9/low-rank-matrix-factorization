@@ -11,7 +11,7 @@ This library offers a suite of techniques for low-rank matrix completion of long
 
 ### Low-rank matrix completion for longitudinal data
 
-Low-rank matrix completion (LMC) is a technique used to recover a partially observed matrix by exploiting the assumption that the matrix has a low-rank structure. In LMC for longitudinal data, the data was collected over time, potentially at irregular intervals. 
+Low-rank matrix completion (LRMC) is a technique used to recover a partially observed matrix by exploiting the assumption that the matrix has a low-rank structure. In LRMC for longitudinal data, the data was collected over time, potentially at irregular intervals. 
 
 In this context, the data can be organized as a partially observed matrix $\mathbf{X} \in \mathbb{R}^{N \times T}$, with $N$ rows corresponding to time-varying entities, and $T$ columns corresponding to the time points. Each entry $X_{n, t}$ would represent an observation for a particular entity $n$ at a particular time $t$. 
 

@@ -31,7 +31,9 @@ def laplacian_kernel_matrix(T, gamma=1.0):
     def kernel(x):
         return np.exp(-1.0 * gamma * np.abs(x))
 
-    return [kernel(np.arange(T) - i) for i in np.arange(T)]
+    return np.array(
+        [kernel(np.arange(T) - i) for i in np.arange(T)]
+    )
 
 
 def basis_baseline_value(shape, min_value):
